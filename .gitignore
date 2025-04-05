@@ -28,6 +28,7 @@ out/
 !**/src/test/**/out/
 .env
 **/.env
+gradle.properties
 
 ### NetBeans ###
 /nbproject/private/
