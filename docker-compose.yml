@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: 4IRBNB-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: 4IRBNB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: fourirbnb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - 4IRBNB-network
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --appendfsync everysec
+    volumes:
+      - redis_data:/data
+    networks:
+      - 4IRBNB-network
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    restart: unless-stopped
+    ports:
+      - "9411:9411"
+    networks:
+      - 4IRBNB-network
+#    environment:
+#      - JAVA_OPTS=-XX:UseSVE=0
+
+networks:
+  4IRBNB-network:
+
+volumes:
+  postgres-data:
+    name: postgres_data
+  redis_data:
+    name: redis_data

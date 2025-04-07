@@ -1,0 +1,13 @@
+rootProject.name = '4IRBNB'
+
+include 'client:coupon'
+include 'client:lodge'
+include 'client:notification'
+include 'client:payment'
+include 'client:reservation'
+include 'client:review'
+include 'client:user'
+include 'server:config'
+include 'server:eureka'
+include 'server:gateway'
+
